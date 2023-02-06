@@ -1,0 +1,30 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %} Index {% endblock %}
+
+{% block main %}
+<h1>Accessories</h1>
+
+<div class="container">
+    <div class="row row-cols-3">
+        {% for accesory in accessories %}
+        <div class="col" style="margin-top: 15px;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/{{ accesory[0] }}">{{ accesory[1] }}</a></h5>
+              <h6 class="card-text">{{ accesory[3] }}</h6>
+              <p class="card-text">I am from: {{ accesory[2] }}</p>
+              {% if accesory[5] == 0 %}
+              <h6 class="card-text">{{ accesory[4] }} zł</h6>
+              {% endif %}
+              {% if accesory[5] > 0 %}
+              <h6 class="card-text"><s>{{ accesory[4] }} zł</s> {{ accesory[4] - 0.01 * accesory[5] * accesory[4]}} zł</h6>
+              {% endif %}
+              <a href="/login" class="card-link">Log in to purchase</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}

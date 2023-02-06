@@ -1,0 +1,42 @@
+{% extends "user/templates/logged_template.html" %}
+
+{% block title %} Account {% endblock %}
+
+{% block main %}
+    <h2> {{ my_info[0][2] }} {{  my_info[0][1] }}'s Account </h2>
+    <h3>e-mail: {{ my_info[0][3] }}</h3>
+    <h3>account: {{ my_info[0][5] }}</h3>
+
+    <h2> Address: </h2>
+    {% for adres in adress %}
+        <h4>{{ adres[4] }} {{ adres[5] }} / {{ adres[6] }}, {{ adres[2] }}, {{ adres[3] }}</h4>
+    {% endfor %}
+
+    <form action="/account" method="POST" class="row g-3">
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">Street</label>
+          <input type="text" class="form-control" name="street" id="street" placeholder="Main Street">
+        </div>
+        <div class="col-6">
+          <label for="inputAddress2" class="form-label">Building number</label>
+          <input type="text" class="form-control"name="building_number" id="building_number" placeholder="Building_number">
+        </div>
+        <div class="col-6">
+            <label for="inputAddress3" class="form-label">Apartment number</label>
+            <input type="text" class="form-control" name="apartment_number" id="apartment_number" placeholder="Apartment number">
+          </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">City</label>
+          <input type="text" class="form-control" name="city" id="city">
+        </div>
+        <div class="col-md-2">
+          <label for="inputZip" class="form-label">Postal Code</label>
+          <input type="text" class="form-control" name="postalcode" id="postalcode">
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Add adress</button>
+        </div>
+      </form>
+
+{% endblock %}
+

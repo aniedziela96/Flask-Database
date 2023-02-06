@@ -1,0 +1,51 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %} Index {% endblock %}
+
+{% block main %}
+<h1> BESTSELLERS </h1>
+
+<div class="container">
+  <div class="row row-cols-3">
+      {% for product in products %}
+      <div class="col" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><a href="/{{ product[0] }}">{{ product[1] }}</a></h5>
+            <h6 class="card-text">{{ product[2] }}</h6>
+            <p class="card-text">I am from: {{ product[3] }}</p>
+            {% if product[5] == 0 %}
+            <h6 class="card-text">{{ product[4] }} zł</h6>
+            {% endif %}
+            {% if product[5] > 0 %}
+            <h6 class="card-text"><s>{{ product[4] }} zł</s> {{ product[4] - 0.01 * product[5] * product[4]}} zł</h6>
+            {% endif %}
+            <a href="/login" class="card-link">Log in to purchase</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+<h1 style="margin-top: 15px;">ON SALE</h1>
+
+<div class="container">
+  <div class="row row-cols-3">
+      {% for on_s in on_sale %}
+      <div class="col" style="margin-top: 15px;">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><a href="/{{ on_s[0] }}">{{ on_s[1] }}</a></h5>
+            <h6 class="card-text">{{ on_s[4] }}</h6>
+            <p class="card-text">I am from: {{ on_s[2] }}</p>
+            <h6 class="card-text"><s>{{ on_s[6] }} zł</s> {{ on_s[6] - 0.01 * on_s[7] * on_s[6]}} zł</h6>
+            <a href="/login" class="card-link">Log in to purchase</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

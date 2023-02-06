@@ -1,0 +1,77 @@
+{% extends "admin/templates/admin_template.html" %}
+
+{% block title %} Add {% endblock %}
+
+{% block main %}
+    <h1>Add existing product</h1>
+    <form action="/admin/add_product" method="post" >
+        <div class="row">
+            <div class="col col-md-3">
+                <select class="form-select" name="what_product">
+                    <option selected> </option>
+                    {% for product in products %}
+                    <option value="{{ product[0] }}">{{ product[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-md-3">
+                <input type="text" class="form-control" name="amount" placeholder="How much to add" aria-label="Last name">
+            </div>
+            <div class="col col-md-3">
+                <button type="submit" class="btn btn-primary btn-block">Add</button>
+            </div>
+            <input type="hidden" name="new_product" value="0">
+        </div>
+    </form>
+
+    <h1>Add new product</h1>
+    <form action="/admin/add_product" method="POST">
+        <div class="row" style="margin-bottom:15px;">
+            <div class="col col-md-2">
+                <label> Name </label>
+                <input type="text" class="form-control" name="new_name" placeholder="New product">
+            </div>
+            <div class="col col-md-2">
+                <label> Country </label>
+                <select class="form-select" name="country">
+                    <option selected> </option>
+                    {% for country in countries %}
+                    <option value="{{ country[0] }}">{{ country[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-md-2">
+                <label> Producent </label>
+                <select class="form-select" name="producent">
+                    <option selected> </option>
+                    {% for producent in producents %}
+                    <option value="{{ producent[0] }}">{{ producent[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col col-md-2">
+                <label> Category </label>
+                <select class="form-select" name="category">
+                    <option selected> </option>
+                    {% for category in categories %}
+                    <option value="{{ category[0] }}">{{ category[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-2">
+                <label> Amount </label>
+                <input type="text" class="form-control" name="new_amount" placeholder="Amount">
+            </div>
+            <div class="col col-md-2">
+                <label> Price </label>
+                <input type="text" class="form-control" name="price" placeholder="Price">
+            </div>
+            <div class="col col-md-3" style="margin-top:20px;">
+                <button type="submit" class="btn btn-primary btn-block">Add</button>
+            </div>
+            <input type="hidden" name="new_product" value="1">
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "user/templates/logged_template.html" %}
+
+{% block title %} Akcesoria {% endblock %}
+
+{% block main %}
+<h1>Accessories</h1>
+
+<div class="row row-cols-3">
+    {% for accessory in accessories %}
+    <div class="col" style="margin-top: 15px;">
+      <div class="card">
+        <div class="card-body">
+          <form action="/logged_accessories" method="POST">
+            <h5 class="card-title"><a href="/user/{{ accessory[0] }}">{{ accessory[1] }}</a></h5>
+              <h6 class="card-text">{{ accessory[3] }}</h6>
+              <p class="card-text">I am from: {{ accessory[2] }}</p>
+              {% if accessory[5] == 0 %}
+              <h6 class="card-text">{{ accessory[4] }} zł</h6>
+              {% endif %}
+              {% if accessory[5] > 0 %}
+              <h6 class="card-text"><s>{{ accessory[4] }} zł</s> {{ accessory[4] - 0.01 * accessory[5] * accessory[4]}} zł</h6>
+              {% endif %}
+            <select class="custom-select mr-sm-2" name="amount" id="inlineFormCustomSelect">
+              <option selected value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Add to basket</button>
+            <input type="hidden" name="product" value="{{ accessory[0] }}">
+            <input type="hidden" name="price" value="{{ accessory[4] - 0.01 * accessory[5] * accessory[4] }}">
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+{% endblock %}

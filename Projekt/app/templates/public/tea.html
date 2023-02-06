@@ -1,0 +1,29 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %} Index {% endblock %}
+
+{% block main %}
+<h1> TEA </h1>
+<div class="container">
+    <div class="row row-cols-3">
+        {% for tea in teas %}
+        <div class="col" style="margin-top: 15px;">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><a href="/{{ tea[0] }}">{{ tea[1] }}</a></h5>
+              <h6 class="card-text">{{ tea[3] }}</h6>
+              <p class="card-text">I am from: {{ tea[2] }}</p>
+              {% if tea[5] == 0 %}
+              <h6 class="card-text">{{ tea[4] }} zł</h6>
+              {% endif %}
+              {% if tea[5] > 0 %}
+              <h6 class="card-text"><s>{{ tea[4] }} zł</s> {{ tea[4] - 0.01 * tea[5] * tea[4]}} zł</h6>
+              {% endif %}
+              <a href="/login" class="card-link">Log in to purchase</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+{% endblock %}

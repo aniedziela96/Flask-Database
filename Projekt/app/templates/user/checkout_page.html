@@ -1,0 +1,24 @@
+{% extends "user/templates/logged_template.html" %}
+
+{% block title %} Checkout {% endblock %}
+
+{% block main %}
+
+<h3>Please choose delivery address</h3>
+<form action="/checkout" method="post" >
+    <div class="row">
+        <div class="col col-md-3">
+            <select class="form-select" name="adres">
+                <option selected> </option>
+                {% for adres in adresy %}
+                <option value="{{ adres[0] }}">{{ adres[4] }} {{ adres[5] }} / {{ adres[6] }}, {{ adres[2] }}, {{ adres[3] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col col-md-3">
+            <button type="submit" class="btn btn-primary btn-block">ORDER</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

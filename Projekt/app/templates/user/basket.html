@@ -1,0 +1,68 @@
+{% extends "user/templates/logged_template.html" %}
+
+{% block title %} Basket {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block main %}
+<div class="cart_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-11 offset-lg-1">
+                <div class="cart_container">
+                    <div class="cart_title">Shopping Cart<small></small></div>
+                    <div class="cart_items">
+                        <ul class="cart_list">
+                            {% set total = {'value': 0} %}
+                            {% for item in items%}
+                            <li class="cart_item clearfix">
+                                <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                    <div class="cart_item_name cart_info_col">
+                                        <div class="cart_item_title">Name</div>
+                                        <div class="cart_item_text">{{ item[3] }}</div>
+                                    </div>
+                                    <div class="cart_item_quantity cart_info_col">
+                                        <div class="cart_item_title">Quantity</div>
+                                        <div class="cart_item_text">{{ item[1] }}</div>
+                                    </div>
+                                    <div class="cart_item_price cart_info_col">
+                                        <div class="cart_item_title">Price</div>
+                                        <div class="cart_item_text">{{ item[2] }} zł</div>
+                                    </div>
+                                    <div class="cart_item_total cart_info_col">
+                                        <div class="cart_item_title">Total</div>
+                                        <div class="cart_item_text">{{ item[1] * item[2] }} zł</div>
+                                    </div>
+                                    <div class="cart_item_total cart_info_col">
+                                        <div class="cart_item_title"></div>
+                                        <div class="cart_item_text">
+                                            <form action="/basket" method="post">
+                                                <button type="submit" class="btn btn-danger">Remove</button>
+                                                <input type="hidden" name="product_id" id="product_id" value="{{ item[4] }}">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            {% if total.update({"value": item[1] * item[2]|float + total.value|float }) %} {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="order_total">
+                        <div class="order_total_content text-md-right">
+                            <div class="order_total_title">Order Total:</div>
+                            <div class="order_total_amount">{{ total.value }} zł</div>
+                        </div>
+                    </div>
+                    <div class="cart_buttons">
+                         <a type="button" href="/logged" class="button cart_button_clear btn-link">Continue Shopping</a>
+                         <a type="button" href="/checkout" class="button cart_button_clear btn-link">Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
