@@ -19,9 +19,9 @@ def before_request():
 
 
 DB_HOST = "localhost"
-DB_NAME = "Projekt"
+DB_NAME = "postgres"
 DB_USER = "postgres"
-DB_PASS = "ola"
+DB_PASS = "postgres"
 
 
 def get_db_connection():
