@@ -8,9 +8,9 @@ import psycopg2.extras
 auth = Blueprint('auth', __name__)
 
 DB_HOST = "localhost"
-DB_NAME = "Projekt"
+DB_NAME = "postgres"
 DB_USER = "postgres"
-DB_PASS = "ola"
+DB_PASS = "postgres"
 
 def get_db_connection():
     conn = psycopg2.connect(host=DB_HOST,
